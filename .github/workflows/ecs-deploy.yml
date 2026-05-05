@@ -21,7 +21,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
-          role-to-assume: arn:aws:iam::867267088667:role/github-actions-ecs-role
+          role-to-assume: arn:aws:iam::135330967620:role/github-actions-ecs-role
 
       # 3. Make scripts executable
       - name: Prepare scripts

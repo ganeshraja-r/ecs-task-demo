@@ -1,6 +1,6 @@
 startBuild()
 {
-ECR_REPO=867267088667.dkr.ecr.us-east-1.amazonaws.com/adfarm-tfw-admin
+ECR_REPO=135330967620.dkr.ecr.us-east-1.amazonaws.com/adfarm-tfw-admin
 DOCKER_BUILD_TAG=$GIT_BRANCH-${BUILD_NUMBER}
 docker build -t $ECR_REPO:$DOCKER_BUILD_TAG --pull=true .
 if [ $? -eq 0 ]; then
@@ -11,7 +11,7 @@ exit 1
 fi
 docker images -q $ECR_REPO
 aws ecr get-login-password --region us-east-1 --profile tfw-new \
-| docker login --username AWS --password-stdin 867267088667.dkr.ecr.us-east-1.amazonaws.com
+| docker login --username AWS --password-stdin 135330967620.dkr.ecr.us-east-1.amazonaws.com
 IMAGE_ID=$(docker images -q $ECR_REPO | awk "NR==1{print $1}")
 echo $IMAGE_ID
 docker tag $IMAGE_ID $ECR_REPO:latest
