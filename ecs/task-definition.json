@@ -1,0 +1,21 @@
+{
+  "family": "adfarm-tfw-web",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::867267088667:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "adfarm-tfw-web",
+      "image": "REPLACE_IMAGE",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true
+    }
+  ]
+}

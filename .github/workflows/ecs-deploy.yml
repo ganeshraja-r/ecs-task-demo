@@ -1,0 +1,38 @@
+name: ECS Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - development
+      - preprod
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configure AWS credentials (IMPORTANT)
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::867267088667:role/github-actions-ecs-role
+
+      # 3. Make scripts executable
+      - name: Prepare scripts
+        run: |
+          chmod +x scripts/build
+          chmod +x scripts/deploy
+
+      # 4. Run your BUILD script (UNCHANGED)
+      - name: Build & Push Docker
+        run: ./scripts/build
+
+      # 5. Run your DEPLOY script (UNCHANGED)
+      - name: Deploy to ECS
+        run: ./scripts/deploy
